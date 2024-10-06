@@ -1,0 +1,31 @@
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - ./config/mysql/data:/var/lib/mysql
+      - ./config/sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - mynetwork
+
+#  redis:
+#    container_name: redis
+#    image: redis
+#    volumes:
+#      - ./config/redis:/data
+#    ports:
+#      - "6379:6379"
+#    networks:
+#      - mynetwork
+
+
+networks:
+  bulebook:
+    driver: bridge
+    name: bulebook
+
