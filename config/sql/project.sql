@@ -1,5 +1,5 @@
 
-CREATE TABLE bulebook.Project
+CREATE TABLE bulebook.project
 (
     `id`         INT AUTO_INCREMENT PRIMARY KEY,
     `title`       varchar(255),

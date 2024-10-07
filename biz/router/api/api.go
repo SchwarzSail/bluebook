@@ -21,11 +21,8 @@ func Register(r *server.Hertz) {
 		_book := root.Group("/book", _bookMw()...)
 		{
 			_user := _book.Group("/user", _userMw()...)
+			_user.POST("/login", append(_loginMw(), api.Login)...)
 			_user.POST("/register", append(_registerMw(), api.Register)...)
 		}
-	}
-	{
-		_user0 := root.Group("/user", _user0Mw()...)
-		_user0.POST("/login", append(_loginMw(), api.Login)...)
 	}
 }

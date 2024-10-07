@@ -10,7 +10,7 @@ env-down:
 
 .PHONY: build
 build:
-	@ docker bulid -f ./Dockerfile -t bulebook .
+	@ docker build  -t bulebook .
 
 .PHONY: run
 run:
@@ -19,3 +19,7 @@ run:
 .PHONY: stop
 stop:
 	@ docker rm -f bulebook & docker rmi -f bulebook:latest
+
+ .PHONY: local
+local:
+	sh build.sh && sh output/bootstrap.sh

@@ -1,4 +1,4 @@
-
+CREATE DATABASE IF NOT EXISTS bulebook;
 CREATE TABLE bulebook.user
 (
     `id`         INT AUTO_INCREMENT PRIMARY KEY,
@@ -7,9 +7,11 @@ CREATE TABLE bulebook.user
     `avatar`     varchar(255),
     `email` varchar(255),
     `major` varchar(255),
+    `account` varchar(255)
 ) engine = InnoDB
   default charset = utf8mb4;
 CREATE INDEX idx_username ON bulebook.user (username);
+CREATE INDEX idx_account ON bulebook.user (account);
 
 /*user_project 关系表*/
 CREATE TABLE bulebook.user_project (

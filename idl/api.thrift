@@ -1,7 +1,7 @@
 namespace go api
 
 struct User {
-    1: string id
+    1: string id //账号
     2: string username
     3: string major //专业
     4: string email //邮箱
@@ -12,15 +12,16 @@ struct RegisterRequest {
     1: string username
     2: string password
     3: string email
-    4: string majoy
+    4: string major
     5: optional string avator
+    6: string account
 }
 
 struct RegisterResponse {
 }
 
 struct LoginRequest {
-    1: string id
+    1: string account
     2: string password
 }
 
@@ -37,5 +38,5 @@ struct Project {
 
 service UserService {
     RegisterResponse Register(1: RegisterRequest req) (api.post="book/user/register")
-    LoginResponse Login(1: LoginRequest req) (api.post="user/login")
+    LoginResponse Login(1: LoginRequest req) (api.post="book/user/login")
 }

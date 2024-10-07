@@ -4,14 +4,16 @@ services:
     container_name: mysql
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
+        - MYSQL_ROOT_PASSWORD=123456
+        - TZ=Asia/Shanghai
+        - MYSQL_DATABASE=bulebook
     volumes:
       - ./config/mysql/data:/var/lib/mysql
-      - ./config/sql:/docker-entrypoint-initdb.d
+      - ./config/sql:/docker-entrypoint-initdb.d/
     ports:
       - "3306:3306"
     networks:
-      - mynetwork
+      - bulebook
 
 #  redis:
 #    container_name: redis

@@ -3,11 +3,15 @@
 package api
 
 import (
-	"context"
-
 	api "bulebook/biz/model/api"
+	"bulebook/biz/pack"
+	"bulebook/pkg/errno"
+	"bulebook/pkg/logger"
+	utils "bulebook/pkg/util"
+	service "bulebook/service/user"
+	"context"
 	"github.com/cloudwego/hertz/pkg/app"
-	"github.com/cloudwego/hertz/pkg/protocol/consts"
+	"strconv"
 )
 
 // Register .
@@ -17,13 +21,17 @@ func Register(ctx context.Context, c *app.RequestContext) {
 	var req api.RegisterRequest
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
+		pack.RespError(c, errno.ParamErr)
 		return
 	}
-
-	resp := new(api.RegisterResponse)
-
-	c.JSON(consts.StatusOK, resp)
+	l := service.NewUserService(ctx)
+	err = l.Register(&req)
+	if err != nil {
+		logger.Errorf("user.Register failed, err: %v", err)
+		pack.RespError(c, errno.ConvertErr(err))
+		return
+	}
+	pack.RespSuccess(c)
 }
 
 // Login .
@@ -33,11 +41,25 @@ func Login(ctx context.Context, c *app.RequestContext) {
 	var req api.LoginRequest
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
+		pack.RespError(c, errno.ParamErr)
 		return
 	}
 
 	resp := new(api.LoginResponse)
+	l := service.NewUserService(ctx)
+	user, err := l.Login(&req)
+	if err != nil {
+		logger.Errorf("user.Login failed, err: %v", err)
+		pack.RespError(c, errno.ConvertErr(err))
+		return
+	}
 
-	c.JSON(consts.StatusOK, resp)
+	token, err := utils.GenerateToken(strconv.Itoa(int(user.ID)), user.Username)
+	if err != nil {
+		logger.Errorf("user.Login failed, err: %v", err)
+		pack.RespError(c, errno.ServiceErr)
+		return
+	}
+	resp.User = pack.BuildUser(user)
+	pack.RespDataWithUserToken(c, resp.User, token)
 }

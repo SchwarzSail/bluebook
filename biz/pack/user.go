@@ -3,11 +3,12 @@ package pack
 import (
 	"bulebook/biz/model/api"
 	"bulebook/dal/db"
+	"strconv"
 )
 
 func BuildUser(u *db.User) *api.User {
 	return &api.User{
-		ID:       u.ID,
+		ID:       strconv.Itoa(int(u.ID)),
 		Username: u.Username,
 		Avatar:   u.Avatar,
 		Email:    u.Email,

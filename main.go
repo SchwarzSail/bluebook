@@ -3,15 +3,20 @@
 package main
 
 import (
+	"bulebook/config"
 	"bulebook/dal"
 	"github.com/cloudwego/hertz/pkg/app/server"
 )
 
 func init() {
+	config.Init()
 	dal.Init()
 }
 func main() {
-	h := server.Default()
+	conf := config.Config
+	h := server.Default(
+		server.WithHostPorts(conf.System.Host + ":" + conf.System.Port),
+	)
 
 	register(h)
 	h.Spin()

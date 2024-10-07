@@ -2,6 +2,7 @@ package utils
 
 import (
 	"bulebook/pkg/constants"
+	"fmt"
 	"github.com/golang-jwt/jwt"
 	"time"
 )
@@ -25,7 +26,7 @@ func GenerateToken(uid string, username string) (accessToken string, err error) 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	accessToken, err = token.SignedString([]byte(constants.JwtSecret))
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("utils.GenerateToken failed, err: %v", err)
 	}
 	return accessToken, nil
 }

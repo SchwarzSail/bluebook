@@ -9,6 +9,7 @@ import (
 )
 
 type User struct {
+	//账号
 	ID       string `thrift:"id,1" form:"id" json:"id" query:"id"`
 	Username string `thrift:"username,2" form:"username" json:"username" query:"username"`
 	//专业
@@ -339,8 +340,9 @@ type RegisterRequest struct {
 	Username string  `thrift:"username,1" form:"username" json:"username" query:"username"`
 	Password string  `thrift:"password,2" form:"password" json:"password" query:"password"`
 	Email    string  `thrift:"email,3" form:"email" json:"email" query:"email"`
-	Majoy    string  `thrift:"majoy,4" form:"majoy" json:"majoy" query:"majoy"`
+	Major    string  `thrift:"major,4" form:"major" json:"major" query:"major"`
 	Avator   *string `thrift:"avator,5,optional" form:"avator" json:"avator,omitempty" query:"avator"`
+	Account  string  `thrift:"account,6" form:"account" json:"account" query:"account"`
 }
 
 func NewRegisterRequest() *RegisterRequest {
@@ -362,8 +364,8 @@ func (p *RegisterRequest) GetEmail() (v string) {
 	return p.Email
 }
 
-func (p *RegisterRequest) GetMajoy() (v string) {
-	return p.Majoy
+func (p *RegisterRequest) GetMajor() (v string) {
+	return p.Major
 }
 
 var RegisterRequest_Avator_DEFAULT string
@@ -375,12 +377,17 @@ func (p *RegisterRequest) GetAvator() (v string) {
 	return *p.Avator
 }
 
+func (p *RegisterRequest) GetAccount() (v string) {
+	return p.Account
+}
+
 var fieldIDToName_RegisterRequest = map[int16]string{
 	1: "username",
 	2: "password",
 	3: "email",
-	4: "majoy",
+	4: "major",
 	5: "avator",
+	6: "account",
 }
 
 func (p *RegisterRequest) IsSetAvator() bool {
@@ -441,6 +448,14 @@ func (p *RegisterRequest) Read(iprot thrift.TProtocol) (err error) {
 		case 5:
 			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField5(iprot); err != nil {
+					goto ReadFieldError
+				}
+			} else if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
+		case 6:
+			if fieldTypeId == thrift.STRING {
+				if err = p.ReadField6(iprot); err != nil {
 					goto ReadFieldError
 				}
 			} else if err = iprot.Skip(fieldTypeId); err != nil {
@@ -516,7 +531,7 @@ func (p *RegisterRequest) ReadField4(iprot thrift.TProtocol) error {
 	} else {
 		_field = v
 	}
-	p.Majoy = _field
+	p.Major = _field
 	return nil
 }
 func (p *RegisterRequest) ReadField5(iprot thrift.TProtocol) error {
@@ -528,6 +543,17 @@ func (p *RegisterRequest) ReadField5(iprot thrift.TProtocol) error {
 		_field = &v
 	}
 	p.Avator = _field
+	return nil
+}
+func (p *RegisterRequest) ReadField6(iprot thrift.TProtocol) error {
+
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
+		return err
+	} else {
+		_field = v
+	}
+	p.Account = _field
 	return nil
 }
 
@@ -555,6 +581,10 @@ func (p *RegisterRequest) Write(oprot thrift.TProtocol) (err error) {
 		}
 		if err = p.writeField5(oprot); err != nil {
 			fieldId = 5
+			goto WriteFieldError
+		}
+		if err = p.writeField6(oprot); err != nil {
+			fieldId = 6
 			goto WriteFieldError
 		}
 	}
@@ -627,10 +657,10 @@ WriteFieldEndError:
 }
 
 func (p *RegisterRequest) writeField4(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("majoy", thrift.STRING, 4); err != nil {
+	if err = oprot.WriteFieldBegin("major", thrift.STRING, 4); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.Majoy); err != nil {
+	if err := oprot.WriteString(p.Major); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -660,6 +690,23 @@ WriteFieldBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 5 begin error: ", p), err)
 WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 5 end error: ", p), err)
+}
+
+func (p *RegisterRequest) writeField6(oprot thrift.TProtocol) (err error) {
+	if err = oprot.WriteFieldBegin("account", thrift.STRING, 6); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteString(p.Account); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
+	}
+	return nil
+WriteFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 6 begin error: ", p), err)
+WriteFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 6 end error: ", p), err)
 }
 
 func (p *RegisterRequest) String() string {
@@ -754,7 +801,7 @@ func (p *RegisterResponse) String() string {
 }
 
 type LoginRequest struct {
-	ID       string `thrift:"id,1" form:"id" json:"id" query:"id"`
+	Account  string `thrift:"account,1" form:"account" json:"account" query:"account"`
 	Password string `thrift:"password,2" form:"password" json:"password" query:"password"`
 }
 
@@ -765,8 +812,8 @@ func NewLoginRequest() *LoginRequest {
 func (p *LoginRequest) InitDefault() {
 }
 
-func (p *LoginRequest) GetID() (v string) {
-	return p.ID
+func (p *LoginRequest) GetAccount() (v string) {
+	return p.Account
 }
 
 func (p *LoginRequest) GetPassword() (v string) {
@@ -774,7 +821,7 @@ func (p *LoginRequest) GetPassword() (v string) {
 }
 
 var fieldIDToName_LoginRequest = map[int16]string{
-	1: "id",
+	1: "account",
 	2: "password",
 }
 
@@ -850,7 +897,7 @@ func (p *LoginRequest) ReadField1(iprot thrift.TProtocol) error {
 	} else {
 		_field = v
 	}
-	p.ID = _field
+	p.Account = _field
 	return nil
 }
 func (p *LoginRequest) ReadField2(iprot thrift.TProtocol) error {
@@ -898,10 +945,10 @@ WriteStructEndError:
 }
 
 func (p *LoginRequest) writeField1(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("id", thrift.STRING, 1); err != nil {
+	if err = oprot.WriteFieldBegin("account", thrift.STRING, 1); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.ID); err != nil {
+	if err := oprot.WriteString(p.Account); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
