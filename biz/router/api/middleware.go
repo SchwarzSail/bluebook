@@ -35,3 +35,13 @@ func _loginMw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
+
+func _projectMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _publishMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}

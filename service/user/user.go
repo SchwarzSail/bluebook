@@ -18,7 +18,7 @@ func NewUserService(ctx context.Context) *UserService {
 }
 
 func (s *UserService) Register(req *api.RegisterRequest) error {
-	dao := db.NewUserDao(s.ctx)
+	dao := db.NewDao(s.ctx)
 	//加密🔐密码
 	passwd, err := utils.SetPassword(req.Password)
 	if err != nil {
@@ -45,7 +45,7 @@ func (s *UserService) Register(req *api.RegisterRequest) error {
 }
 
 func (s *UserService) Login(req *api.LoginRequest) (*db.User, error) {
-	dao := db.NewUserDao(s.ctx)
+	dao := db.NewDao(s.ctx)
 	user, err := dao.GetUserByAccount(req.Account)
 	if err != nil {
 		return nil, fmt.Errorf("service.Login failed, err: %v", err)

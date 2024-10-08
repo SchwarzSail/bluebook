@@ -1,14 +1,13 @@
 package pack
 
 import (
-	"bulebook/biz/model/api"
+	"bulebook/biz/model/model"
 	"bulebook/dal/db"
-	"strconv"
 )
 
-func BuildUser(u *db.User) *api.User {
-	return &api.User{
-		ID:       strconv.Itoa(int(u.ID)),
+func BuildUser(u *db.User) *model.User {
+	return &model.User{
+		Account:  u.Account,
 		Username: u.Username,
 		Avatar:   u.Avatar,
 		Email:    u.Email,
@@ -16,8 +15,8 @@ func BuildUser(u *db.User) *api.User {
 	}
 }
 
-func BuildUserList(list []*db.User) []*api.User {
-	resp := make([]*api.User, len(list))
+func BuildUserList(list []*db.User) []*model.User {
+	resp := make([]*model.User, len(list))
 	for i, data := range list {
 		resp[i] = BuildUser(data)
 	}

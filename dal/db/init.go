@@ -3,12 +3,29 @@ package db
 import (
 	"bulebook/config"
 	"bulebook/pkg/logger"
+	"context"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 )
 
 var DB *gorm.DB
+
+type Dao struct {
+	*gorm.DB
+}
+
+func NewDBClient(ctx context.Context) *gorm.DB {
+	db := DB
+	return db.WithContext(ctx)
+}
+
+func NewDao(ctx context.Context) *Dao {
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	return &Dao{NewDBClient(ctx)}
+}
 
 func InitMySQL() {
 	conf := config.Config.Mysql

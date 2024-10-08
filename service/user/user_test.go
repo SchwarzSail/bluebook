@@ -17,14 +17,14 @@ func Test_Register(t *testing.T) {
 		Username: "xxxx",
 		Password: "123456",
 		Email:    "",
-		Majoy:    "",
+		Major:    "",
 		Avator:   nil,
 	}
 	// Mock the NewUserDao to return a pointer to a mocked DAO
-	mockDao := new(db.UserDao)
-	mockey.Mock(db.NewUserDao).Return(mockDao).Build()
+	mockDao := new(db.Dao)
+	mockey.Mock(db.NewDao).Return(mockDao).Build()
 	// Mock the CreateUser method to simulate successful user creation
-	mockey.Mock((*db.UserDao).CreateUser).Return(nil).Build()
+	mockey.Mock((*db.Dao).CreateUser).Return(nil).Build()
 
 	err := l.Register(&req)
 	assert.Nil(t, err)

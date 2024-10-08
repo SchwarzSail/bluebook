@@ -20,6 +20,10 @@ func Register(r *server.Hertz) {
 	{
 		_book := root.Group("/book", _bookMw()...)
 		{
+			_project := _book.Group("/project", _projectMw()...)
+			_project.POST("/publish", append(_publishMw(), api.Publish)...)
+		}
+		{
 			_user := _book.Group("/user", _userMw()...)
 			_user.POST("/login", append(_loginMw(), api.Login)...)
 			_user.POST("/register", append(_registerMw(), api.Register)...)
