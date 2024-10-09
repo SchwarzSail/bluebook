@@ -1,5 +1,5 @@
 update:
-	@ hz update -idl ./idl/api.thrift
+	@ hz update -idl ./idl/api.thrift -module bluebook
 .PHONY: env-up
 env-up:
 	@ docker compose -f ./docker-compose.yml up -d
@@ -10,15 +10,15 @@ env-down:
 
 .PHONY: build
 build:
-	@ docker build  -t bulebook .
+	@ docker build  -t bluebook .
 
 .PHONY: run
 run:
-	@ docker run -d -p 8080:8080 bulebook --network bulebook
+	@ docker run -d -p 8080:8080 bluebook --network bluebook
 
 .PHONY: stop
 stop:
-	@ docker rm -f bulebook & docker rmi -f bulebook:latest
+	@ docker rm -f bluebook & docker rmi -f bluebook:latest
 
  .PHONY: local
 local:

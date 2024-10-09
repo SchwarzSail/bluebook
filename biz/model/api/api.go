@@ -3,7 +3,7 @@
 package api
 
 import (
-	"bulebook/biz/model/model"
+	"bluebook/biz/model/model"
 	"context"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"

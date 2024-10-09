@@ -3,7 +3,7 @@
 package api
 
 import (
-	api "bulebook/biz/handler/api"
+	api "bluebook/biz/handler/api"
 	"github.com/cloudwego/hertz/pkg/app/server"
 )
 

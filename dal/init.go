@@ -1,6 +1,6 @@
 package dal
 
-import "bulebook/dal/db"
+import "bluebook/dal/db"
 
 func Init() {
 	db.InitMySQL()

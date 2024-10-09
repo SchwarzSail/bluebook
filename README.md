@@ -1,4 +1,4 @@
-# bulebook
+# bluebook
 
 ### 环境搭建
 ```shell

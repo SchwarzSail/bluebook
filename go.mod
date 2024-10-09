@@ -1,4 +1,4 @@
-module bulebook
+module bluebook
 
 go 1.23.2
 

@@ -3,12 +3,12 @@
 package api
 
 import (
-	api "bulebook/biz/model/api"
-	"bulebook/biz/pack"
-	"bulebook/pkg/errno"
-	"bulebook/pkg/logger"
-	utils "bulebook/pkg/util"
-	service "bulebook/service/user"
+	api "bluebook/biz/model/api"
+	"bluebook/biz/pack"
+	"bluebook/pkg/errno"
+	"bluebook/pkg/logger"
+	utils "bluebook/pkg/util"
+	service "bluebook/service/user"
 	"context"
 	"github.com/cloudwego/hertz/pkg/app"
 	"strconv"

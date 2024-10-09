@@ -6,14 +6,14 @@ services:
     environment:
         - MYSQL_ROOT_PASSWORD=123456
         - TZ=Asia/Shanghai
-        - MYSQL_DATABASE=bulebook
+        - MYSQL_DATABASE=bluebook
     volumes:
       - ./config/mysql/data:/var/lib/mysql
       - ./config/sql:/docker-entrypoint-initdb.d/
     ports:
       - "3306:3306"
     networks:
-      - bulebook
+      - bluebook
 
 #  redis:
 #    container_name: redis
@@ -27,7 +27,7 @@ services:
 
 
 networks:
-  bulebook:
+  bluebook:
     driver: bridge
-    name: bulebook
+    name: bluebook
 

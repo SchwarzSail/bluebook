@@ -3,7 +3,7 @@
 package main
 
 import (
-	router "bulebook/biz/router"
+	router "bluebook/biz/router"
 	"github.com/cloudwego/hertz/pkg/app/server"
 )
 

@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"bulebook/pkg/constants"
+	"bluebook/pkg/constants"
 	"fmt"
 	"github.com/golang-jwt/jwt"
 	"time"
@@ -20,7 +20,7 @@ func GenerateToken(uid string, username string) (accessToken string, err error) 
 		UserName: username,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: (time.Now().Add(24 * 30 * time.Hour)).Unix(),
-			Issuer:    "bulebook",
+			Issuer:    "bluebook",
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)

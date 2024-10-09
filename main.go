@@ -3,8 +3,8 @@
 package main
 
 import (
-	"bulebook/config"
-	"bulebook/dal"
+	"bluebook/config"
+	"bluebook/dal"
 	"github.com/cloudwego/hertz/pkg/app/server"
 )
 

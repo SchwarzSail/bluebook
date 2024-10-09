@@ -3,7 +3,7 @@
 package main
 
 import (
-	handler "bulebook/biz/handler"
+	handler "bluebook/biz/handler"
 	"github.com/cloudwego/hertz/pkg/app/server"
 )
 

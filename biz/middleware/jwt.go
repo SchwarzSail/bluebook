@@ -1,11 +1,11 @@
 package middleware
 
 import (
-	"bulebook/biz/model"
-	"bulebook/biz/pack"
-	"bulebook/pkg/errno"
-	"bulebook/pkg/logger"
-	utils "bulebook/pkg/util"
+	"bluebook/biz/model"
+	"bluebook/biz/pack"
+	"bluebook/pkg/errno"
+	"bluebook/pkg/logger"
+	utils "bluebook/pkg/util"
 	"context"
 	"github.com/cloudwego/hertz/pkg/app"
 )

@@ -1,7 +1,7 @@
 package config
 
 import (
-	"bulebook/pkg/logger"
+	"bluebook/pkg/logger"
 	"github.com/spf13/viper"
 )
 

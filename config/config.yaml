@@ -1,11 +1,11 @@
 system:
-  domain: "bulebook"
+  domain: "bluebook"
   host: "0.0.0.0"
   port: "8080"
 
 mysql:
   userName: "root"
   mysqlPassword: "123456"
-  dbName: "bulebook"
+  dbName: "bluebook"
   dbHost: "127.0.0.1"
   dbPort: "3306"

@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS bulebook;
-CREATE TABLE bulebook.user
+CREATE DATABASE IF NOT EXISTS bluebook;
+CREATE TABLE bluebook.user
 (
     `id`       INT AUTO_INCREMENT PRIMARY KEY,
     `username` varchar(255),
@@ -11,9 +11,9 @@ CREATE TABLE bulebook.user
     `role` varchar(255)
 ) engine = InnoDB
   default charset = utf8mb4;
-CREATE INDEX idx_username ON bulebook.user (username);
-CREATE INDEX idx_account ON bulebook.user (account);
-CREATE TABLE bulebook.user_project
+CREATE INDEX idx_username ON bluebook.user (username);
+CREATE INDEX idx_account ON bluebook.user (account);
+CREATE TABLE bluebook.user_project
 (
     `username`   varchar(255),
     `project_id` INT,

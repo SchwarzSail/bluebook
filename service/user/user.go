@@ -1,9 +1,9 @@
 package service
 
 import (
-	"bulebook/biz/model/api"
-	"bulebook/dal/db"
-	utils "bulebook/pkg/util"
+	"bluebook/biz/model/api"
+	"bluebook/dal/db"
+	utils "bluebook/pkg/util"
 	"context"
 	"fmt"
 )

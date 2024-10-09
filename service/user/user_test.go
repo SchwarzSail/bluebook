@@ -1,8 +1,8 @@
 package service
 
 import (
-	"bulebook/biz/model/api"
-	"bulebook/dal/db"
+	"bluebook/biz/model/api"
+	"bluebook/dal/db"
 	"context"
 	"github.com/bytedance/mockey"
 	"github.com/stretchr/testify/assert"

@@ -1,8 +1,8 @@
 package pack
 
 import (
-	"bulebook/biz/model/model"
-	"bulebook/dal/db"
+	"bluebook/biz/model/model"
+	"bluebook/dal/db"
 )
 
 func BuildUser(u *db.User) *model.User {
