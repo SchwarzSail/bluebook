@@ -12,6 +12,7 @@ type User struct {
 	Avatar   string `gorm:"avatar"`
 	Email    string `gorm:"email"`
 	Major    string `gorm:"major"`
+	Role     string `gorm:"role"`
 }
 
 func (dao *Dao) CreateUser(user *User) (err error) {

@@ -16,6 +16,7 @@ type RegisterRequest struct {
 	Major    string  `thrift:"major,4" form:"major" json:"major" query:"major"`
 	Avator   *string `thrift:"avator,5,optional" form:"avator" json:"avator,omitempty" query:"avator"`
 	Account  string  `thrift:"account,6" form:"account" json:"account" query:"account"`
+	Role     string  `thrift:"role,7" form:"role" json:"role" query:"role"`
 }
 
 func NewRegisterRequest() *RegisterRequest {
@@ -54,6 +55,10 @@ func (p *RegisterRequest) GetAccount() (v string) {
 	return p.Account
 }
 
+func (p *RegisterRequest) GetRole() (v string) {
+	return p.Role
+}
+
 var fieldIDToName_RegisterRequest = map[int16]string{
 	1: "username",
 	2: "password",
@@ -61,6 +66,7 @@ var fieldIDToName_RegisterRequest = map[int16]string{
 	4: "major",
 	5: "avator",
 	6: "account",
+	7: "role",
 }
 
 func (p *RegisterRequest) IsSetAvator() bool {
@@ -129,6 +135,14 @@ func (p *RegisterRequest) Read(iprot thrift.TProtocol) (err error) {
 		case 6:
 			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField6(iprot); err != nil {
+					goto ReadFieldError
+				}
+			} else if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
+		case 7:
+			if fieldTypeId == thrift.STRING {
+				if err = p.ReadField7(iprot); err != nil {
 					goto ReadFieldError
 				}
 			} else if err = iprot.Skip(fieldTypeId); err != nil {
@@ -229,6 +243,17 @@ func (p *RegisterRequest) ReadField6(iprot thrift.TProtocol) error {
 	p.Account = _field
 	return nil
 }
+func (p *RegisterRequest) ReadField7(iprot thrift.TProtocol) error {
+
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
+		return err
+	} else {
+		_field = v
+	}
+	p.Role = _field
+	return nil
+}
 
 func (p *RegisterRequest) Write(oprot thrift.TProtocol) (err error) {
 	var fieldId int16
@@ -258,6 +283,10 @@ func (p *RegisterRequest) Write(oprot thrift.TProtocol) (err error) {
 		}
 		if err = p.writeField6(oprot); err != nil {
 			fieldId = 6
+			goto WriteFieldError
+		}
+		if err = p.writeField7(oprot); err != nil {
+			fieldId = 7
 			goto WriteFieldError
 		}
 	}
@@ -380,6 +409,23 @@ WriteFieldBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 6 begin error: ", p), err)
 WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 6 end error: ", p), err)
+}
+
+func (p *RegisterRequest) writeField7(oprot thrift.TProtocol) (err error) {
+	if err = oprot.WriteFieldBegin("role", thrift.STRING, 7); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteString(p.Role); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
+	}
+	return nil
+WriteFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 7 begin error: ", p), err)
+WriteFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 7 end error: ", p), err)
 }
 
 func (p *RegisterRequest) String() string {

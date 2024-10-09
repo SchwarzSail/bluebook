@@ -36,6 +36,7 @@ func (s *UserService) Register(req *api.RegisterRequest) error {
 		Major:    req.Major,
 		Email:    req.Email,
 		Account:  req.Account,
+		Role:     req.Role,
 	}
 	err = dao.CreateUser(userModel)
 	if err != nil {

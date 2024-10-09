@@ -9,6 +9,7 @@ struct RegisterRequest {
     4: string major
     5: optional string avator
     6: string account
+    7: string role
 }
 
 struct RegisterResponse {

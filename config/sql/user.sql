@@ -7,7 +7,8 @@ CREATE TABLE bulebook.user
     `avatar`   varchar(255),
     `email`    varchar(255),
     `major`    varchar(255),
-    `account`  varchar(255)
+    `account`  varchar(255),
+    `role` varchar(255)
 ) engine = InnoDB
   default charset = utf8mb4;
 CREATE INDEX idx_username ON bulebook.user (username);

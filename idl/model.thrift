@@ -6,6 +6,7 @@ struct User {
     3: string major //专业
     4: string email //邮箱
     5: string avatar //头像
+    6: string role
 }
 
 struct Project {
