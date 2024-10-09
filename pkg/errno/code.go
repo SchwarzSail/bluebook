@@ -5,11 +5,11 @@ const (
 	ServiceErrCode
 	ParamErrCode
 	PageOutOfRangeCode
-	//user
+	// user
 	UserAlreadyExistErrCode
 	UserNotExistErrCode
 	AuthorizationFailedErrCode
 
-	//utils
+	// utils
 	UploadErrCode
 )

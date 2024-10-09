@@ -3,6 +3,7 @@
 package api
 
 import (
+	"bluebook/biz/middleware"
 	"github.com/cloudwego/hertz/pkg/app"
 )
 
@@ -43,5 +44,7 @@ func _projectMw() []app.HandlerFunc {
 
 func _publishMw() []app.HandlerFunc {
 	// your code...
-	return nil
+	return []app.HandlerFunc{
+		middleware.JWT(),
+	}
 }

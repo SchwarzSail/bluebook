@@ -4,9 +4,10 @@ import (
 	"bluebook/biz/model/api"
 	"bluebook/dal/db"
 	"context"
+	"testing"
+
 	"github.com/bytedance/mockey"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func Test_Register(t *testing.T) {

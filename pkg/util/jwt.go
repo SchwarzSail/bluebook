@@ -3,8 +3,9 @@ package utils
 import (
 	"bluebook/pkg/constants"
 	"fmt"
-	"github.com/golang-jwt/jwt"
 	"time"
+
+	"github.com/golang-jwt/jwt"
 )
 
 type Claims struct {

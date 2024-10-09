@@ -10,6 +10,6 @@ var (
 	UserNotExist           = NewErrNo(UserNotExistErrCode, "User doesn't exists")
 	AuthorizationFailedErr = NewErrNo(AuthorizationFailedErrCode, "Authorization failed")
 
-	//utils
+	// utils
 	UploadErr = NewErrNo(UploadErrCode, "Upload failed")
 )

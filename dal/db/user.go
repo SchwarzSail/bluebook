@@ -16,7 +16,7 @@ type User struct {
 }
 
 func (dao *Dao) CreateUser(user *User) (err error) {
-	//先判断是不是已经创建过了
+	// 先判断是不是已经创建过了
 	_, err = dao.GetUserByAccount(user.Account)
 	if err == nil {
 		return fmt.Errorf("dal.CreateUser failed, err: %v", "user existed")

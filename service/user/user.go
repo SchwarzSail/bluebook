@@ -19,12 +19,12 @@ func NewUserService(ctx context.Context) *UserService {
 
 func (s *UserService) Register(req *api.RegisterRequest) error {
 	dao := db.NewDao(s.ctx)
-	//加密🔐密码
+	// 加密🔐密码
 	passwd, err := utils.SetPassword(req.Password)
 	if err != nil {
 		return fmt.Errorf("service.Register failed, err: %v", err)
 	}
-	//保证不出现空指针错误
+	// 保证不出现空指针错误
 	if req.Avator == nil {
 		req.Avator = new(string)
 		*req.Avator = ""
@@ -51,7 +51,7 @@ func (s *UserService) Login(req *api.LoginRequest) (*db.User, error) {
 	if err != nil {
 		return nil, fmt.Errorf("service.Login failed, err: %v", err)
 	}
-	//校验密码
+	// 校验密码
 	if !utils.CheckPassword(req.Password, user.Password) {
 		return nil, fmt.Errorf("service.Login failed, err: %v", "invalid password")
 	}

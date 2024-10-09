@@ -2,6 +2,7 @@ package config
 
 import (
 	"bluebook/pkg/logger"
+
 	"github.com/spf13/viper"
 )
 

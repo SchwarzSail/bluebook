@@ -7,6 +7,7 @@ import (
 	"bluebook/pkg/logger"
 	utils "bluebook/pkg/util"
 	"context"
+
 	"github.com/cloudwego/hertz/pkg/app"
 )
 
@@ -20,7 +21,7 @@ func JWT() app.HandlerFunc {
 			return
 		}
 
-		claims, valid, _ := utils.ParseToken(token)
+		_, valid, _ := utils.ParseToken(token)
 
 		// 过期，需要重新登录
 		if !valid {
@@ -30,7 +31,7 @@ func JWT() app.HandlerFunc {
 			return
 		}
 		c.Header("token", token)
-		claims, _, _ = utils.ParseToken(token)
+		claims, _, _ := utils.ParseToken(token)
 		ctx = model.NewContext(ctx, &model.UserInfo{ID: claims.ID, UserName: claims.UserName})
 		c.Next(ctx)
 	}

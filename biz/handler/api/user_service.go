@@ -10,8 +10,9 @@ import (
 	utils "bluebook/pkg/util"
 	service "bluebook/service/user"
 	"context"
-	"github.com/cloudwego/hertz/pkg/app"
 	"strconv"
+
+	"github.com/cloudwego/hertz/pkg/app"
 )
 
 // Register .
