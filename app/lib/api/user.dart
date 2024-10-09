@@ -1,71 +1,42 @@
-import 'package:blue_book/http/http.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class UserAPI {
-  static const String rootPath = '/api/user';
+  static const String rootPath = '/book/user';
   static const String registerPath = '$rootPath/register';
   static const String loginPath = '$rootPath/login';
   static const String resetPasswordPath = '$rootPath/reset_password';
-	
+
   /// 用户注册
-  static Future<void> register({
-    required String username,
-    required String email,
-    required String account,
-    required String password,
-  }) async {
-    try {
-      var response = await HTTP.post(
-        registerPath,
-        data: {
-          'username': username,
-          'account': account,
-          'email': email,
-          'password': password,
-        },
-      );
-      print('注册成功: $response');
-    } catch (e) {
-      print('注册失败: $e');
-    }
+  static Future<http.Response> sendRegisterReq(String account,String password,String role) async {
+    var url = Uri.parse('http://127.0.0.1:8080$registerPath');
+    var response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'account' : account,
+        'password': password,
+        'role':role,
+      }),
+    );
+    return response;
   }
 
   /// 用户登录
-  static Future<void> login({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      var response = await HTTP.post(
-        loginPath,
-        data: {
-          'email': email,
-          'password': password,
-        },
-      );
-      print('登录成功: $response');
-    } catch (e) {
-      print('登录失败: $e');
-    }
-  }
-  
-  /// 重置密码
-  Future<void> resetPassword({
-    required String email,
-    required String newPassword,
-    required String resetCode,  // 假设后端要求验证码
-  }) async {
-    try {
-      var response = await HTTP.post(
-        resetPasswordPath,
-        data: {
-          'email': email,
-          'newPassword': newPassword,
-          'resetCode': resetCode,
-        },
-      );
-      print('重置密码成功: $response');
-    } catch (e) {
-      print('重置密码失败: $e');
-    }
+  static Future<http.Response> sendLoginReq(String account, String password) async {
+    var url = Uri.parse('http://localhost:8080$loginPath');
+    var response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'account': account,
+        'password': password,
+      }),
+    );
+    return response;
   }
 }
