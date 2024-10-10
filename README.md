@@ -1,4 +1,4 @@
-# bluebook
+## bluebook
 
 ### 环境搭建（后端）
 ```shell
@@ -10,6 +10,12 @@ make env-up
 go mod tidy
 make local
 ```
+
+### 结束环境
+```shell
+make env-down
+```
+
 
 ### 项目目录
 ```shell

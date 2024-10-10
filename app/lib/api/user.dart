@@ -8,7 +8,7 @@ class UserAPI {
   static const String resetPasswordPath = '$rootPath/reset_password';
 
   /// 用户注册
-  static Future<http.Response> sendRegisterReq(String account,String password,String role) async {
+  static Future<http.Response> sendRegisterReq(String account,String password,String username,String email) async {
     var url = Uri.parse('http://127.0.0.1:8080$registerPath');
     var response = await http.post(
       url,
@@ -18,7 +18,8 @@ class UserAPI {
       body: jsonEncode(<String, String>{
         'account' : account,
         'password': password,
-        'role':role,
+        'username':username,
+        'email':email,
       }),
     );
     return response;
