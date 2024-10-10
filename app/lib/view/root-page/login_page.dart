@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:blue_book/view/root-page/register_page.dart';
-import 'package:blue_book/view/root-page/reset_password_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app_page.dart';
 
@@ -67,18 +66,6 @@ class LoginPageState extends State<LoginPage> {
               controller: _passwordController,
               decoration: InputDecoration(labelText: '密码'),
               obscureText: true,
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ResetPasswordPage()),
-                  );
-                },
-                child: Text('忘记密码？'),
-              ),
             ),
             ElevatedButton(
               onPressed: login,

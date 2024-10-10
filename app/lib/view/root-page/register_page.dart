@@ -1,4 +1,5 @@
-import 'package:blue_book/pack/base.dart';
+import 'package:blue_book/pack/user.dart';
+import 'package:blue_book/view/root-page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart'; // 引入fluttertoast库用于显示提示信息
 import 'package:blue_book/api/user.dart';
@@ -14,6 +15,7 @@ class RegisterPageState extends State<RegisterPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _roleController = TextEditingController();
 
   Future<void> register() async {
     var response = await UserAPI.sendRegisterReq(
@@ -21,19 +23,23 @@ class RegisterPageState extends State<RegisterPage> {
       _passwordController.text,
       _usernameController.text,
       _emailController.text,
+      _roleController.text,
     );
-    if (!mounted) return;
     if (response.statusCode == 200) {
       final responseBody = json.decode(response.body);
-      final baseResponse = Base.fromJson(responseBody);
-      if (baseResponse.code == 10000) {
+      final registerResponse = RegisterResponse.fromJson(responseBody);
+      if (registerResponse.base?.code == 10000) {
         // 注册成功
         Fluttertoast.showToast(
           msg: "注册成功",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
         );
-      Navigator.pop(context); // 假设登录页面是注册页面的前一个页面
+        if (!mounted) return;
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()),
+        );
       }else{
         // 注册失败，显示错误消息
         Fluttertoast.showToast(
@@ -79,6 +85,10 @@ class RegisterPageState extends State<RegisterPage> {
             TextField(
               controller: _emailController,
               decoration: InputDecoration(labelText: '邮箱'),
+            ),
+            TextField(
+              controller: _roleController,
+              decoration: InputDecoration(labelText: '身份'),
             ),
             ElevatedButton(
               onPressed: register,

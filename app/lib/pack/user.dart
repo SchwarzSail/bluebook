@@ -1,5 +1,15 @@
 import 'base.dart';
 
+class RegisterResponse {
+  Base? base;
+
+  RegisterResponse({this.base});
+
+  RegisterResponse.fromJson(Map<String, dynamic> json) {
+    base = json['base'] != null ? Base.fromJson(json['base']) : null;
+  }
+}
+
 class LoginResponse {
   Base? base;
   String? token;
@@ -26,15 +36,13 @@ class InfoResponse {
 
 class User {
   String? account;
-  String? password;
   String? name;
   String? role;
 
-  User({this.account, this.password, this.name, this.role});
+  User({this.account, this.name, this.role});
 
   User.fromJson(Map<String, dynamic> json) {
     account = json['account'];
-    password = json['password'];
     name = json['name'];
     role = json['role'];
   }
