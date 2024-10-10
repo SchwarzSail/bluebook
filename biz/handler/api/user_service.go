@@ -3,6 +3,7 @@
 package api
 
 import (
+	"bluebook/biz/model"
 	api "bluebook/biz/model/api"
 	"bluebook/biz/pack"
 	"bluebook/pkg/errno"
@@ -72,9 +73,23 @@ func Getinfo(ctx context.Context, c *app.RequestContext) {
 	var req api.GetinfoRequest
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		pack.RespError(c, errno.ParamErr)
+		logger.Errorf("user.Getinfo failed, err: %v", err)
+		pack.RespError(c, errno.ConvertErr(err))
 		return
 	}
-
+	u, err := model.GetUserInfo(ctx)
+	if err != nil {
+		logger.Errorf("user.Getinfo failed, err: %v", err)
+		pack.RespError(c, errno.ConvertErr(err))
+		return
+	}
+	l := service.NewUserService(ctx)
+	user, err := l.GetUserInfo(u.UserName)
+	if err != nil {
+		logger.Errorf("user.Getinfo failed, err: %v", err)
+		pack.RespError(c, errno.ConvertErr(err))
+		return
+	}
+	pack.RespData(c, pack.BuildUser(user))
 	return
 }

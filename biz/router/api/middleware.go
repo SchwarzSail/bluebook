@@ -51,5 +51,7 @@ func _publishMw() []app.HandlerFunc {
 
 func _getinfoMw() []app.HandlerFunc {
 	// your code...
-	return nil
+	return []app.HandlerFunc{
+		middleware.JWT(),
+	}
 }

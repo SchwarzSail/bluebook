@@ -57,3 +57,12 @@ func (s *UserService) Login(req *api.LoginRequest) (*db.User, error) {
 	}
 	return user, nil
 }
+
+func (s *UserService) GetUserInfo(username string) (*db.User, error) {
+	dao := db.NewDao(s.ctx)
+	user, err := dao.GetUserByUsername(username)
+	if err != nil {
+		return nil, fmt.Errorf("service.GetUserInfo failed, err: %v", err)
+	}
+	return user, nil
+}
