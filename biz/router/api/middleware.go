@@ -48,3 +48,8 @@ func _publishMw() []app.HandlerFunc {
 		middleware.JWT(),
 	}
 }
+
+func _getinfoMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
