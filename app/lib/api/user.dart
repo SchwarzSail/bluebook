@@ -5,7 +5,7 @@ class UserAPI {
   static const String rootPath = '/book/user';
   static const String registerPath = '$rootPath/register';
   static const String loginPath = '$rootPath/login';
-  static const String resetPasswordPath = '$rootPath/reset_password';
+  static const String infoPath = '$rootPath/info';
 
   /// 用户注册
   static Future<http.Response> sendRegisterReq(String account,String password,String username,String email) async {
@@ -37,6 +37,18 @@ class UserAPI {
         'account': account,
         'password': password,
       }),
+    );
+    return response;
+  }
+
+  static Future<http.Response> sendGetInfoReq(String token)async{
+    var url = Uri.parse('http://localhost:8080$infoPath');
+    var response = await http.get(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
     );
     return response;
   }

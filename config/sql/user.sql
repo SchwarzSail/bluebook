@@ -13,6 +13,7 @@ CREATE TABLE bluebook.user
   default charset = utf8mb4;
 CREATE INDEX idx_username ON bluebook.user (username);
 CREATE INDEX idx_account ON bluebook.user (account);
+
 CREATE TABLE bluebook.user_project
 (
     `username`   varchar(255),
