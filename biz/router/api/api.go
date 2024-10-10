@@ -22,6 +22,7 @@ func Register(r *server.Hertz) {
 		{
 			_project := _book.Group("/project", _projectMw()...)
 			_project.POST("/publish", append(_publishMw(), api.Publish)...)
+			_project.GET("/search", append(_searchMw(), api.Search)...)
 		}
 		{
 			_user := _book.Group("/user", _userMw()...)

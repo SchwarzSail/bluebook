@@ -31,3 +31,12 @@ func (s *ProjectService) CreateProject(req *api.PublishRequesnt) error {
 	}
 	return nil
 }
+
+func (s *ProjectService) Search(req *api.SearchProjectRequest) ([]*db.Project, error) {
+	dao := db.NewDao(s.ctx)
+	projects, err := dao.SearchProjectByTypes(req.Keyword)
+	if err != nil {
+		return nil, fmt.Errorf("service.Search failed, err: %v", err)
+	}
+	return projects, nil
+}

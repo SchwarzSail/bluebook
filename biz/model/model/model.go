@@ -386,10 +386,10 @@ type Project struct {
 	Description string `thrift:"description,2" form:"description" json:"description" query:"description"`
 	//发起人
 	Username string `thrift:"username,3" form:"username" json:"username" query:"username"`
-	//参与人
-	Numbers []string `thrift:"numbers,4" form:"numbers" json:"numbers" query:"numbers"`
+	//参与人数
+	Numbers string `thrift:"numbers,4" form:"numbers" json:"numbers" query:"numbers"`
 	//专业类型
-	Types []string `thrift:"types,5" form:"types" json:"types" query:"types"`
+	Types string `thrift:"types,5" form:"types" json:"types" query:"types"`
 }
 
 func NewProject() *Project {
@@ -411,11 +411,11 @@ func (p *Project) GetUsername() (v string) {
 	return p.Username
 }
 
-func (p *Project) GetNumbers() (v []string) {
+func (p *Project) GetNumbers() (v string) {
 	return p.Numbers
 }
 
-func (p *Project) GetTypes() (v []string) {
+func (p *Project) GetTypes() (v string) {
 	return p.Types
 }
 
@@ -471,7 +471,7 @@ func (p *Project) Read(iprot thrift.TProtocol) (err error) {
 				goto SkipFieldError
 			}
 		case 4:
-			if fieldTypeId == thrift.LIST {
+			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField4(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -479,7 +479,7 @@ func (p *Project) Read(iprot thrift.TProtocol) (err error) {
 				goto SkipFieldError
 			}
 		case 5:
-			if fieldTypeId == thrift.LIST {
+			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField5(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -549,47 +549,23 @@ func (p *Project) ReadField3(iprot thrift.TProtocol) error {
 	return nil
 }
 func (p *Project) ReadField4(iprot thrift.TProtocol) error {
-	_, size, err := iprot.ReadListBegin()
-	if err != nil {
-		return err
-	}
-	_field := make([]string, 0, size)
-	for i := 0; i < size; i++ {
 
-		var _elem string
-		if v, err := iprot.ReadString(); err != nil {
-			return err
-		} else {
-			_elem = v
-		}
-
-		_field = append(_field, _elem)
-	}
-	if err := iprot.ReadListEnd(); err != nil {
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
 		return err
+	} else {
+		_field = v
 	}
 	p.Numbers = _field
 	return nil
 }
 func (p *Project) ReadField5(iprot thrift.TProtocol) error {
-	_, size, err := iprot.ReadListBegin()
-	if err != nil {
-		return err
-	}
-	_field := make([]string, 0, size)
-	for i := 0; i < size; i++ {
 
-		var _elem string
-		if v, err := iprot.ReadString(); err != nil {
-			return err
-		} else {
-			_elem = v
-		}
-
-		_field = append(_field, _elem)
-	}
-	if err := iprot.ReadListEnd(); err != nil {
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
 		return err
+	} else {
+		_field = v
 	}
 	p.Types = _field
 	return nil
@@ -691,18 +667,10 @@ WriteFieldEndError:
 }
 
 func (p *Project) writeField4(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("numbers", thrift.LIST, 4); err != nil {
+	if err = oprot.WriteFieldBegin("numbers", thrift.STRING, 4); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteListBegin(thrift.STRING, len(p.Numbers)); err != nil {
-		return err
-	}
-	for _, v := range p.Numbers {
-		if err := oprot.WriteString(v); err != nil {
-			return err
-		}
-	}
-	if err := oprot.WriteListEnd(); err != nil {
+	if err := oprot.WriteString(p.Numbers); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -716,18 +684,10 @@ WriteFieldEndError:
 }
 
 func (p *Project) writeField5(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("types", thrift.LIST, 5); err != nil {
+	if err = oprot.WriteFieldBegin("types", thrift.STRING, 5); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteListBegin(thrift.STRING, len(p.Types)); err != nil {
-		return err
-	}
-	for _, v := range p.Types {
-		if err := oprot.WriteString(v); err != nil {
-			return err
-		}
-	}
-	if err := oprot.WriteListEnd(); err != nil {
+	if err := oprot.WriteString(p.Types); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {

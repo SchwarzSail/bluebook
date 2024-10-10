@@ -49,6 +49,15 @@ struct PublishResponse {
 
 }
 
+struct SearchProjectRequest {
+    1: required string keyword
+}
+
+struct SearchProjectResponse {
+    1: list<model.Project> projects
+}
+
 service ProjectService {
     PublishResponse Publish(1: PublishRequesnt req) (api.post="book/project/publish")
+    SearchProjectResponse Search(1: SearchProjectRequest req) (api.get="book/project/search")
 }

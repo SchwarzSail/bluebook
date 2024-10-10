@@ -45,3 +45,12 @@ func (dao *Dao) GetAllProjectByUsername(username string) ([]Project, error) {
 	}
 	return projects, nil
 }
+
+func (dao *Dao) SearchProjectByTypes(types string) ([]*Project, error) {
+	var projects []*Project
+	err := dao.DB.Where("types LIKE ?", "%"+types+"%").Find(&projects).Error
+	if err != nil {
+		return nil, fmt.Errorf("dal.SearchProjectByTypes failed, err: %v", err)
+	}
+	return projects, nil
+}

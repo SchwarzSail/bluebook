@@ -55,3 +55,10 @@ func _getinfoMw() []app.HandlerFunc {
 		middleware.JWT(),
 	}
 }
+
+func _searchMw() []app.HandlerFunc {
+	// your code...
+	return []app.HandlerFunc{
+		middleware.JWT(),
+	}
+}

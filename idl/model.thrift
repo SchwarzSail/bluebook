@@ -13,6 +13,6 @@ struct Project {
     1: string title
     2: string description
     3: string username //发起人
-    4: list<string> numbers //参与人
-    5: list<string> types//专业类型
+    4: string numbers //参与人数
+    5: string types//专业类型
 }

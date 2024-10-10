@@ -3,13 +3,12 @@
 package api
 
 import (
+	api "bluebook/biz/model/api"
 	"bluebook/biz/pack"
 	"bluebook/pkg/errno"
 	"bluebook/pkg/logger"
 	service "bluebook/service/project"
 	"context"
-
-	api "bluebook/biz/model/api"
 
 	"github.com/cloudwego/hertz/pkg/app"
 )
@@ -32,4 +31,26 @@ func Publish(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 	pack.RespSuccess(c)
+}
+
+// Search .
+// @router book/project/search [GET]
+func Search(ctx context.Context, c *app.RequestContext) {
+	var err error
+	var req api.SearchProjectRequest
+	err = c.BindAndValidate(&req)
+	if err != nil {
+		pack.RespError(c, errno.ParamErr)
+		return
+	}
+	l := service.NewProjectService(ctx)
+	projects, err := l.Search(&req)
+	if err != nil {
+		logger.Errorf("project.Search failed, err: %v", err)
+		pack.RespError(c, errno.ConvertErr(err))
+		return
+	}
+	resp := new(api.SearchProjectResponse)
+	resp.Projects = pack.BuildProjectList(projects)
+	pack.RespData(c, resp.Projects)
 }
