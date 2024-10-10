@@ -1,7 +1,6 @@
 namespace go api
 include "model.thrift"
 
-
 struct RegisterRequest {
     1: string username
     2: string password
@@ -24,9 +23,18 @@ struct LoginResponse {
     1: model.User user
 }
 
+struct GetinfoRequest{
+    1: string account
+}
+
+struct GetinfoResponse{
+    1: model.User user
+}
+
 service UserService {
     RegisterResponse Register(1: RegisterRequest req) (api.post="book/user/register")
     LoginResponse Login(1: LoginRequest req) (api.post="book/user/login")
+    GetinfoResponse Getinfo(1: GetinfoRequest req) (api.get="book/user/info")
 }
 
 

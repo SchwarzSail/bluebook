@@ -4,7 +4,6 @@ package api
 
 import (
 	api "bluebook/biz/handler/api"
-
 	"github.com/cloudwego/hertz/pkg/app/server"
 )
 
@@ -26,6 +25,7 @@ func Register(r *server.Hertz) {
 		}
 		{
 			_user := _book.Group("/user", _userMw()...)
+			_user.GET("/info", append(_getinfoMw(), api.Getinfo)...)
 			_user.POST("/login", append(_loginMw(), api.Login)...)
 			_user.POST("/register", append(_registerMw(), api.Register)...)
 		}

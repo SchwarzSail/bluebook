@@ -64,3 +64,17 @@ func Login(ctx context.Context, c *app.RequestContext) {
 	resp.User = pack.BuildUser(user)
 	pack.RespDataWithUserToken(c, resp.User, token)
 }
+
+// Getinfo .
+// @router book/user/info [GET]
+func Getinfo(ctx context.Context, c *app.RequestContext) {
+	var err error
+	var req api.GetinfoRequest
+	err = c.BindAndValidate(&req)
+	if err != nil {
+		pack.RespError(c, errno.ParamErr)
+		return
+	}
+
+	return
+}
