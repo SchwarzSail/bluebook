@@ -3,12 +3,14 @@
 package api
 
 import (
+	"bluebook/biz/model"
 	api "bluebook/biz/model/api"
 	"bluebook/biz/pack"
 	"bluebook/pkg/errno"
 	"bluebook/pkg/logger"
 	service "bluebook/service/project"
 	"context"
+	"strconv"
 
 	"github.com/cloudwego/hertz/pkg/app"
 )
@@ -53,4 +55,31 @@ func Search(ctx context.Context, c *app.RequestContext) {
 	resp := new(api.SearchProjectResponse)
 	resp.Projects = pack.BuildProjectList(projects)
 	pack.RespData(c, resp.Projects)
+}
+
+// Join .
+// @router book/project/join [POST]
+func Join(ctx context.Context, c *app.RequestContext) {
+	var err error
+	var req api.JoinProjectRequest
+	err = c.BindAndValidate(&req)
+	if err != nil {
+		pack.RespError(c, errno.ParamErr)
+		return
+	}
+	userInfo, err := model.GetUserInfo(ctx)
+	if err != nil {
+		logger.Errorf("project.Join failed, err: %v", err)
+		pack.RespError(c, errno.ConvertErr(err))
+		return
+	}
+	l := service.NewProjectService(ctx)
+	projectId, _ := strconv.ParseUint(req.ProjectID, 10, 64)
+	if err = l.Join(userInfo.UserName, uint(projectId)); err != nil {
+		logger.Errorf("project.Join failed, err: %v", err)
+		pack.RespError(c, errno.ConvertErr(err))
+		return
+	}
+
+	pack.RespSuccess(c)
 }

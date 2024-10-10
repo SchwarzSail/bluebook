@@ -40,3 +40,12 @@ func (s *ProjectService) Search(req *api.SearchProjectRequest) ([]*db.Project, e
 	}
 	return projects, nil
 }
+
+func (s *ProjectService) Join(username string, projectID uint) error {
+	dao := db.NewDao(s.ctx)
+	err := dao.Join(username, projectID)
+	if err != nil {
+		return fmt.Errorf("service.Join failed, err: %v", err)
+	}
+	return nil
+}

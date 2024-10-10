@@ -57,7 +57,20 @@ struct SearchProjectResponse {
     1: list<model.Project> projects
 }
 
+struct JoinProjectRequest {
+    1: required string username
+    2: required string email
+    3: required string major
+    4: optional string reasion
+    5: required string project_id
+}
+
+struct JoinProjectResponse {
+
+}
+
 service ProjectService {
     PublishResponse Publish(1: PublishRequesnt req) (api.post="book/project/publish")
     SearchProjectResponse Search(1: SearchProjectRequest req) (api.get="book/project/search")
+    JoinProjectResponse Join(1: JoinProjectRequest req) (api.post="book/project/join")
 }

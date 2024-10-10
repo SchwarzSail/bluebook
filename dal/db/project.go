@@ -54,3 +54,11 @@ func (dao *Dao) SearchProjectByTypes(types string) ([]*Project, error) {
 	}
 	return projects, nil
 }
+
+func (dao *Dao) Join(username string, projectID uint) error {
+	err := dao.DB.Exec("INSERT INTO user_project (username, project_id) VALUES (?, ?)", username, projectID).Error
+	if err != nil {
+		return fmt.Errorf("dal.Join failed, err: %v", err)
+	}
+	return nil
+}

@@ -62,3 +62,8 @@ func _searchMw() []app.HandlerFunc {
 		middleware.JWT(),
 	}
 }
+
+func _joinMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
