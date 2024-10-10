@@ -30,8 +30,8 @@ class ProfilePageState extends State<ProfilePage> {
           var data = jsonDecode(response.body);
           var userInfo = InfoResponse.fromJson(data);
           setState(() {
-            _name = userInfo.user?.name ?? '未知';
-            _role = userInfo.user?.role ?? '未知';
+            _name = userInfo.user?.name ?? '052101418';
+            _role = userInfo.user?.role ?? 'ricky';
           });
         } else {
           // 处理错误情况

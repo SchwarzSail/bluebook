@@ -13,7 +13,7 @@ import (
 
 func JWT() app.HandlerFunc {
 	return func(ctx context.Context, c *app.RequestContext) {
-		token := string(c.GetHeader("token"))
+		token := string(c.GetHeader("Authorization"))
 		if token == "" {
 			logger.Error("middleware.JWT token is empty")
 			pack.RespError(c, errno.AuthorizationFailedErr)
@@ -30,7 +30,7 @@ func JWT() app.HandlerFunc {
 			c.Abort()
 			return
 		}
-		c.Header("token", token)
+		c.Header("Authorization", token)
 		claims, _, _ := utils.ParseToken(token)
 		ctx = model.NewContext(ctx, &model.UserInfo{ID: claims.ID, UserName: claims.UserName})
 		c.Next(ctx)
